@@ -30,5 +30,7 @@
     "If you did not receive the email": "Si no has recibido el email",
     "click here to request another": "pulsa aquí para que te enviemos otro",
     "All rights reserved.":  "Todos los derechos reservados.",
-    "Your email address is not verified.": "Su dirección de correo electrónico no está verificada."
+    "Your email address is not verified.": "Su dirección de correo electrónico no está verificada.",
+    "Unauthenticated.": "No está autenticado.",
+    "The given data was invalid.": "Los datos proporcionados no son válidos."
 }
