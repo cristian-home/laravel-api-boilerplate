@@ -20,6 +20,7 @@
         "laraveles/spanish": "^1.5"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.9",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "jasonmccreary/laravel-test-assertions": "^1.0",
