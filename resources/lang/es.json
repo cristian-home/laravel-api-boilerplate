@@ -48,5 +48,8 @@
     "The authentication server is not responding": "El servidor de autenticación no responde",
     "No authentication client specified": "No se especificó un cliente de autenticación",
     "Invalid authentication client": "Cliente de autenticación no válido",
-    "Already authenticated": "Ya está autenticado"
+    "Already authenticated": "Ya está autenticado",
+    "User created in :app.": "Usuario creado en :app.",
+    "A user has been created in :app with this e-mail address.": "Se ha creado un usuario en :app con esta dirección de correo eléctrónico.",
+    "Login to the website": "Entrar en el sitio web"
 }
