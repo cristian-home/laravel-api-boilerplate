@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Notification;
+namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Queue\SerializesModels;
 
-class NewUserNotification extends Notification
+class NewUserNotification extends Notification implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -44,9 +44,11 @@ class NewUserNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', 'https://laravel.com')
-            ->line('Thank you for using our application!');
+            ->subject(__('User created in :app.', ['app' => config('app.name')]))
+            ->greeting(__('Hello!'))
+            ->line(__('A user has been created in :app with this e-mail address.', ['app' => config('app.name')]))
+            ->action(__('Login to the website'), config('app.url'))
+            ->line(__('Thank you for using our application!'));
     }
 
     /**

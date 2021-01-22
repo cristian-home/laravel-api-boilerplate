@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Events\NewUser;
+use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
-use App\Models\User;
-use App\Notification\NewUserNotification;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
 
 class UsersController extends Controller
 {
+    /**
+     * Constructor de la nueva instancia del controlador
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        $this->middleware('verified');
+        $this->middleware('to.lower')->only(['store', 'update']);
+    }
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\UserCollection
@@ -31,8 +41,7 @@ class UsersController extends Controller
     {
         $user = User::create($request->validated());
 
-        Notification::send($user, new NewUserNotification($user));
-
+        // Disparar evento NewUser
         event(new NewUser($user));
     }
 
