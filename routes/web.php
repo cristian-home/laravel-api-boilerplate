@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// PWA (Web App) Routes
+Route::view('/', 'home');
+Route::get('/#/reset-password', [HomeController::class, 'index'])->name('pwa.password.reset');
+Route::get('/#/email/verify', [HomeController::class, 'index'])->name('pwa.verification.verify');
