@@ -27,5 +27,9 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
+
+        Passport::tokensExpireIn(now()->addMinutes( config('services.passport.oauth.expiration.access_token')));
+        Passport::refreshTokensExpireIn(now()->addMinutes( config('services.passport.oauth.expiration.refresh_token')));
+        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
     }
 }
