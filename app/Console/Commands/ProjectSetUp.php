@@ -44,7 +44,7 @@ class ProjectSetUp extends Command
         $this->info('Creating web app passport client.');
         $this->call('passport:client', [
             '--password' => 'default',
-            '--name' => 'SIM Web App',
+            '--name' => config('services.passport.oauth.clients.webapp.name'),
             '--provider' => 'users'
         ]);
 

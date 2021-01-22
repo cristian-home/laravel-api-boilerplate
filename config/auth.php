@@ -114,4 +114,11 @@ return [
 
     'password_timeout' => 10800,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Defalut Password for manually created users
+    |--------------------------------------------------------------------------
+    */
+
+    'default_password' => env('DEFAULT_USER_PASSWORD', 'APP2021#')
 ];
