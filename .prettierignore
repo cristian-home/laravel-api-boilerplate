@@ -1,0 +1,35 @@
+# Excluir todo por defecto
+# /**/*
+
+# Incluir todas las carpetas
+!/**/*/
+
+# Excluir node_modules
+/node_modules/
+
+# Excluir vendor
+/vendor/
+
+# Excluir public
+/public/
+
+# Excluir storage
+/storage/
+
+# Excluir todos los archivos
+*.*
+
+# Incluir archivos a formatear
+!*.html
+!*.js
+!*.css
+!*.scss
+!*.json
+!*.vue
+!*.jsx
+!*.php
+
+# Include specific file extensions if they appear under a "src" folder
+# !/*/*/src/**/*.ts
+# !/*/*/src/**/*.tsx
+# !/*/*/config/**/*.json

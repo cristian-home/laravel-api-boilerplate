@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "module": "commonjs",
+        "paths": {
+            "@fonts/*": ["./resources/fonts/*"],
+            "@css/*": ["./resources/css/*"],
+            "@js/*": ["./resources/js/*"]
+        }
+    }
+}
