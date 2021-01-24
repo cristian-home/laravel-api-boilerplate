@@ -10,9 +10,12 @@
     "quoteProps": "consistent",
     "requirePragma": false,
     "semi": true,
-    "singleQuote": false,
+    "singleQuote": true,
     "tabWidth": 4,
     "trailingComma": "none",
     "useTabs": false,
-    "endOfLine": "lf"
+    "endOfLine": "lf",
+    "phpVersion": "7.4",
+    "trailingCommaPHP": true,
+    "braceStyle": "psr-2"
 }

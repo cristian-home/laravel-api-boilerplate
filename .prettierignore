@@ -29,6 +29,9 @@
 !*.jsx
 !*.php
 
+# Excluir ide helper
+_ide_helper.php
+
 # Include specific file extensions if they appear under a "src" folder
 # !/*/*/src/**/*.ts
 # !/*/*/src/**/*.tsx
