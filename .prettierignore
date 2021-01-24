@@ -16,6 +16,9 @@
 # Excluir storage
 /storage/
 
+# Excluir cache
+/bootstrap/cache/
+
 # Excluir todos los archivos
 *.*
 
