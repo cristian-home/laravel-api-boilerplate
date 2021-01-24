@@ -20,7 +20,7 @@ class ResetPasswordControllerTest extends TestCase
     public function testUserCanResetHisPassword()
     {
         $user = User::factory()->create([
-            'password' => Hash::make("Password"),
+            'password' => Hash::make('Password'),
         ]);
 
         $token = Password::getRepository()->create($user);
@@ -28,10 +28,10 @@ class ResetPasswordControllerTest extends TestCase
         $newPassword = $this->faker->password;
 
         $response = $this->postJson(route('password.update'), [
-            "token" => $token,
-            "email" => $user->email,
-            "password" => $newPassword,
-            "password_confirmation" => $newPassword
+            'token' => $token,
+            'email' => $user->email,
+            'password' => $newPassword,
+            'password_confirmation' => $newPassword,
         ]);
 
         $response->assertSuccessful();
@@ -46,11 +46,11 @@ class ResetPasswordControllerTest extends TestCase
     public function testUserCannotResetHisPasswordWithAnInvalidToken()
     {
         $user1 = User::factory()->create([
-            'password' => Hash::make("Password"),
+            'password' => Hash::make('Password'),
         ]);
 
         $user2 = User::factory()->create([
-            'password' => Hash::make("Password"),
+            'password' => Hash::make('Password'),
         ]);
 
         $token = Password::getRepository()->create($user2);
@@ -58,10 +58,10 @@ class ResetPasswordControllerTest extends TestCase
         $newPassword = $this->faker->password;
 
         $response = $this->postJson(route('password.update'), [
-            "token" => $token,
-            "email" => $user1->email,
-            "password" => $newPassword,
-            "password_confirmation" => $newPassword
+            'token' => $token,
+            'email' => $user1->email,
+            'password' => $newPassword,
+            'password_confirmation' => $newPassword,
         ]);
 
         $response->assertStatus(422);

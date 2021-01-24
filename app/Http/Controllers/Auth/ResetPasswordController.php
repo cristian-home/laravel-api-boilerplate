@@ -53,9 +53,10 @@ class ResetPasswordController extends Controller
     {
         $token = $request->route()->parameter('token');
 
-        return view('auth.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
-        );
+        return view('auth.passwords.reset')->with([
+            'token' => $token,
+            'email' => $request->email,
+        ]);
     }
 
     /**
@@ -75,7 +76,7 @@ class ResetPasswordController extends Controller
             $this->credentials($request),
             function ($user, $password) {
                 $this->resetPassword($user, $password);
-            }
+            },
         );
 
         // If the password was successfully reset, we will redirect the user back to
@@ -96,7 +97,7 @@ class ResetPasswordController extends Controller
         return [
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8'
+            'password' => 'required|confirmed|min:8',
         ];
     }
 
@@ -122,7 +123,7 @@ class ResetPasswordController extends Controller
             'email',
             'password',
             'password_confirmation',
-            'token'
+            'token',
         );
     }
 
@@ -171,8 +172,7 @@ class ResetPasswordController extends Controller
             return new JsonResponse(['message' => __($response)], 200);
         }
 
-        return redirect($this->redirectPath())
-            ->with('status', __($response));
+        return redirect($this->redirectPath())->with('status', __($response));
     }
 
     /**

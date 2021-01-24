@@ -45,7 +45,7 @@ class ProjectSetUp extends Command
         $this->call('passport:client', [
             '--password' => 'default',
             '--name' => config('services.passport.oauth.clients.webapp.name'),
-            '--provider' => 'users'
+            '--provider' => 'users',
         ]);
 
         $this->call('db:seed');

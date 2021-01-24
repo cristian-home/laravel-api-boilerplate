@@ -30,7 +30,9 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('oauth_personal_access_clients', function (Blueprint $table) {
+        $this->schema->create('oauth_personal_access_clients', function (
+            Blueprint $table
+        ) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('client_id');
             $table->timestamps();

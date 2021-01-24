@@ -72,7 +72,7 @@ class VerificationController extends Controller
             'id' => 'required|exists:users,id',
             'signature' => 'required',
             'expires' => 'required',
-            'hash' => 'required'
+            'hash' => 'required',
         ]);
 
         $user = User::findOrFail($request->id);
@@ -80,15 +80,15 @@ class VerificationController extends Controller
         if (
             !hash_equals(
                 (string) $request->hash,
-                sha1($user->getEmailForVerification())
+                sha1($user->getEmailForVerification()),
             )
         ) {
-            throw new AuthorizationException(__("The URL is not valid."));
+            throw new AuthorizationException(__('The URL is not valid.'));
         }
 
         if ($user->hasVerifiedEmail()) {
             return response()->json([
-                "message" => __("The mail has already been verified.")
+                'message' => __('The mail has already been verified.'),
             ]);
         }
 
@@ -96,7 +96,7 @@ class VerificationController extends Controller
             event(new Verified($user));
         }
 
-        return response()->json(["message" => __("Mail verified correctly.")]);
+        return response()->json(['message' => __('Mail verified correctly.')]);
     }
 
     /**
@@ -108,23 +108,23 @@ class VerificationController extends Controller
     public function resend(Request $request)
     {
         $request->validate([
-            'email' => 'required|exists:users,email'
+            'email' => 'required|exists:users,email',
         ]);
 
         $user = User::where('email', $request->email)->first();
 
         if ($user->hasVerifiedEmail()) {
             return response()->json([
-                "message" => __("The mail has already been verified.")
+                'message' => __('The mail has already been verified.'),
             ]);
         }
 
         $user->sendEmailVerificationNotification();
 
         return response()->json([
-            "message" => __("An email has been sent to :mail.", [
-                'mail' => $request->email
-            ])
+            'message' => __('An email has been sent to :mail.', [
+                'mail' => $request->email,
+            ]),
         ]);
     }
 

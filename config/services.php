@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -36,14 +35,16 @@ return [
             'endpoint' => env('OAUTH_ENDPOINT'),
             'expiration' => [
                 'access_token' => env('OAUTH_ACCESS_TOKEN_EXPIRE_MINUTES', 10),
-                'refresh_token' => env('OAUTH_REFRESH_TOKEN_EXPIRE_MINUTES', 60 * 24 * 60),
+                'refresh_token' => env(
+                    'OAUTH_REFRESH_TOKEN_EXPIRE_MINUTES',
+                    60 * 24 * 60,
+                ),
             ],
             'clients' => [
                 'webapp' => [
-                    'name' => env('OAUTH_WEB_APP_CLIENT_NAME', 'WebApp')
+                    'name' => env('OAUTH_WEB_APP_CLIENT_NAME', 'WebApp'),
                 ],
             ],
-        ]
-    ]
-
+        ],
+    ],
 ];

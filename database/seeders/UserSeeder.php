@@ -18,10 +18,12 @@ class UserSeeder extends Seeder
         // Usuario admin
         User::factory()->create([
             'email' => 'chome@cpe.gov.co',
-            'password' => Hash::make('880731Cr')
+            'password' => Hash::make('880731Cr'),
         ]);
 
         // Usuarios de prueba
-        User::factory()->count(50)->create();
+        User::factory()
+            ->count(50)
+            ->create();
     }
 }

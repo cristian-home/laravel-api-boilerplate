@@ -38,17 +38,17 @@ class ResetPasswordMail extends Mailable implements ShouldQueue
     public function build()
     {
         $params = http_build_query([
-            "token" => $this->token,
-            "email" => $this->emailAddress
+            'token' => $this->token,
+            'email' => $this->emailAddress,
         ]);
 
-        $pwaURL = url(route('pwa.password.reset')) . "?" . $params;
+        $pwaURL = url(route('pwa.password.reset')) . '?' . $params;
 
         return $this->markdown('emails.users.reset')
             ->subject(Lang::get('Reset Password Notification'))
             ->with([
-                "actionUrl" => $pwaURL,
-                "token" => $this->token
+                'actionUrl' => $pwaURL,
+                'token' => $this->token,
             ]);
     }
 }

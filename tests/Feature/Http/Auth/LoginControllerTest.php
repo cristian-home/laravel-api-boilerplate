@@ -26,12 +26,11 @@ class LoginControllerTest extends TestCase
         $response->assertJsonStructure([
             'token_type',
             'expires_in',
-            'access_token'
+            'access_token',
         ]);
 
         $response->assertStatus(200);
     }
-
 
     /**
      * A basic feature test example.
@@ -42,16 +41,21 @@ class LoginControllerTest extends TestCase
     {
         $response = $this->makeTestLoginRequest();
 
-        $cookie = $this->getCookie($response, "refresh-token", false);
+        $cookie = $this->getCookie($response, 'refresh-token', false);
 
-        $cookies = ["refresh-token" => $cookie->getValue()];
+        $cookies = ['refresh-token' => $cookie->getValue()];
 
-        $refreshResponse = $this->call('POST', route('auth.refresh'), [], $cookies);
+        $refreshResponse = $this->call(
+            'POST',
+            route('auth.refresh'),
+            [],
+            $cookies,
+        );
 
         $response->assertJsonStructure([
             'token_type',
             'expires_in',
-            'access_token'
+            'access_token',
         ]);
 
         $response->assertStatus(200);
@@ -62,13 +66,13 @@ class LoginControllerTest extends TestCase
         $clientName = config('services.passport.oauth.clients.webapp.name');
 
         return Client::factory()->create([
-            "user_id" => null,
-            "name" => $clientName,
-            "provider" => "users",
-            "redirect" => "http://localhost",
-            "personal_access_client" => false,
-            "password_client" => true,
-            "revoked" => false,
+            'user_id' => null,
+            'name' => $clientName,
+            'provider' => 'users',
+            'redirect' => 'http://localhost',
+            'personal_access_client' => false,
+            'password_client' => true,
+            'revoked' => false,
         ]);
     }
 
@@ -76,7 +80,7 @@ class LoginControllerTest extends TestCase
     {
         return User::factory()->create([
             'email' => $email,
-            'password' => Hash::make($password)
+            'password' => Hash::make($password),
         ]);
     }
 
@@ -88,23 +92,20 @@ class LoginControllerTest extends TestCase
         $this->createOauthClient();
         $this->createUser($email, $password);
 
-        return $this->postJson(
-            route('auth.login'),
-            [
-                'email' => $email,
-                'password' => $password
-            ]
-        );
+        return $this->postJson(route('auth.login'), [
+            'email' => $email,
+            'password' => $password,
+        ]);
     }
 
     protected function getCookie($response, $cookieName)
     {
-        $cookie = Arr::first(
-            $response->headers->getCookies(),
-            function ($cookie, $index) use ($cookieName) {
-                return $cookie->getName() === $cookieName;
-            }
-        );
+        $cookie = Arr::first($response->headers->getCookies(), function (
+            $cookie,
+            $index
+        ) use ($cookieName) {
+            return $cookie->getName() === $cookieName;
+        });
 
         return $cookie;
     }

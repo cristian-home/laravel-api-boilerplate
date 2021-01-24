@@ -62,7 +62,9 @@ class LoggedUserController extends Controller
         // Revocar el access token...
         $tokenRepository->revokeAccessToken($accessToken->id);
         // Revocar el refresh token...
-        $refreshTokenRepository->revokeRefreshTokensByAccessTokenId($accessToken->id);
+        $refreshTokenRepository->revokeRefreshTokensByAccessTokenId(
+            $accessToken->id,
+        );
         // Olvidar cookie de refresh token
         $cookie = Cookie::forget('refresh-token');
 

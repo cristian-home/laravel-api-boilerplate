@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Namespace
@@ -14,7 +13,6 @@ return [
     |
     */
     'namespace' => 'App',
-
 
     /*
     |-----------------"jasonmccreary/laravel-test-assertions": "^1.0",
@@ -30,7 +28,6 @@ return [
     */
     'models_namespace' => 'Models',
     'controllers_namespace' => 'Http\\Controllers',
-
 
     /*
     |--------------------------------------------------------------------------
@@ -138,12 +135,13 @@ return [
         'seeder' => \Blueprint\Generators\SeederGenerator::class,
         'test' => \Blueprint\Generators\TestGenerator::class,
         'event' => \Blueprint\Generators\Statements\EventGenerator::class,
-        'form_request' => \Blueprint\Generators\Statements\FormRequestGenerator::class,
+        'form_request' =>
+            \Blueprint\Generators\Statements\FormRequestGenerator::class,
         'job' => \Blueprint\Generators\Statements\JobGenerator::class,
         'mail' => \Blueprint\Generators\Statements\MailGenerator::class,
-        'notification' => \Blueprint\Generators\Statements\NotificationGenerator::class,
+        'notification' =>
+            \Blueprint\Generators\Statements\NotificationGenerator::class,
         'resource' => \Blueprint\Generators\Statements\ResourceGenerator::class,
         'view' => \Blueprint\Generators\Statements\ViewGenerator::class,
     ],
-
 ];

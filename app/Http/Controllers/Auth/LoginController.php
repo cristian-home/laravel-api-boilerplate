@@ -31,7 +31,10 @@ class LoginController extends Controller
     {
         $this->middleware('to.lower')->only(['login']);
         $this->middleware('auth:api')->only(['logout']);
-        $this->middleware('guest:api')->except(['logout', 'refreshAccessToken']);
+        $this->middleware('guest:api')->except([
+            'logout',
+            'refreshAccessToken',
+        ]);
     }
 
     /**
@@ -78,9 +81,9 @@ class LoginController extends Controller
         $this->clearLoginAttempts($request);
 
         // Hacer petición al proxy y devolver los tokens
-        return $this->proxy("password", [
+        return $this->proxy('password', [
             'username' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
         ]);
     }
 
@@ -93,14 +96,14 @@ class LoginController extends Controller
     protected function refreshAccessToken(Request $request)
     {
         if ($request->hasCookie('refresh-token')) {
-            return $this->proxy("refresh_token", [
-                'refresh_token' => $request->cookie('refresh-token')
+            return $this->proxy('refresh_token', [
+                'refresh_token' => $request->cookie('refresh-token'),
             ]);
         }
 
         return response()->json(
-            ["message" => __("Invalid refresh token")],
-            401
+            ['message' => __('Invalid refresh token')],
+            401,
         );
     }
 }

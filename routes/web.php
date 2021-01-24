@@ -16,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 // PWA (Web App) Routes
 Route::view('/', 'home');
-Route::get('/#/reset-password', [HomeController::class, 'index'])->name('pwa.password.reset');
-Route::get('/#/email/verify', [HomeController::class, 'index'])->name('pwa.verification.verify');
+Route::get('/#/reset-password', [HomeController::class, 'index'])->name(
+    'pwa.password.reset',
+);
+Route::get('/#/email/verify', [HomeController::class, 'index'])->name(
+    'pwa.verification.verify',
+);

@@ -29,24 +29,17 @@ class UsersControllerTest extends TestCase
 
         $this->actingAs(User::factory()->create(), 'api');
 
-        User::factory()->count(3)->create();
+        User::factory()
+            ->count(3)
+            ->create();
 
         $response = $this->getJson(route('users.index'));
 
         $response->assertOk();
-        $response->assertJsonStructure(
-            [
-                "data" => [
-                    [
-                        "id",
-                        "email",
-                        "email_verified_at",
-                    ]
-                ]
-            ]
-        );
+        $response->assertJsonStructure([
+            'data' => [['id', 'email', 'email_verified_at']],
+        ]);
     }
-
 
     /**
      * @test
@@ -56,7 +49,7 @@ class UsersControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\UsersController::class,
             'store',
-            \App\Http\Requests\UserStoreRequest::class
+            \App\Http\Requests\UserStoreRequest::class,
         );
     }
 
@@ -126,11 +119,12 @@ class UsersControllerTest extends TestCase
 
         event($event);
 
-        Notification::assertSentTo($user, NewUserNotification::class, function ($notification) use ($user) {
+        Notification::assertSentTo($user, NewUserNotification::class, function (
+            $notification
+        ) use ($user) {
             return $notification->user->is($user);
         });
     }
-
 
     /**
      * @test
@@ -144,17 +138,10 @@ class UsersControllerTest extends TestCase
         $response = $this->get(route('users.show', $user));
 
         $response->assertOk();
-        $response->assertJsonStructure(
-            [
-                "data" => [
-                    "id",
-                    "email",
-                    "email_verified_at"
-                ]
-            ]
-        );
+        $response->assertJsonStructure([
+            'data' => ['id', 'email', 'email_verified_at'],
+        ]);
     }
-
 
     /**
      * @test
@@ -164,7 +151,7 @@ class UsersControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\UsersController::class,
             'update',
-            \App\Http\Requests\UserUpdateRequest::class
+            \App\Http\Requests\UserUpdateRequest::class,
         );
     }
 
@@ -186,7 +173,6 @@ class UsersControllerTest extends TestCase
 
         $this->assertEquals($email, $user->email);
     }
-
 
     /**
      * @test

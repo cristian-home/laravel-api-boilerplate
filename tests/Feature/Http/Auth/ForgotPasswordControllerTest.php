@@ -22,12 +22,9 @@ class ForgotPasswordControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->postJson(
-            route('password.email'),
-            [
-                'email' => $user->email
-            ]
-        );
+        $response = $this->postJson(route('password.email'), [
+            'email' => $user->email,
+        ]);
 
         $response->assertStatus(200);
 
@@ -45,16 +42,10 @@ class ForgotPasswordControllerTest extends TestCase
 
         $user = User::factory()->create();
 
-        $this->postJson(
-            route('password.email'),
-            [
-                'email' => $user->email
-            ]
-        );
+        $this->postJson(route('password.email'), [
+            'email' => $user->email,
+        ]);
 
-        Notification::assertSentTo(
-            [$user],
-            ResetPasswordNotification::class
-        );
+        Notification::assertSentTo([$user], ResetPasswordNotification::class);
     }
 }

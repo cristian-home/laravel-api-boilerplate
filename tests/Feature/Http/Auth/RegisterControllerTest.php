@@ -25,21 +25,15 @@ class RegisterControllerTest extends TestCase
         $email = $this->faker->safeEmail;
         $password = $this->faker->password;
 
-        $response = $this->postJson(
-            route('auth.register'),
-            [
-                'email' => $email,
-                'password' => $password,
-                'password_confirmation' => $password
-            ]
-        );
+        $response = $this->postJson(route('auth.register'), [
+            'email' => $email,
+            'password' => $password,
+            'password_confirmation' => $password,
+        ]);
 
         $user = User::where('email', $email)->first();
 
-        Notification::assertSentTo(
-            [$user],
-            VerifyEmailNotification::class
-        );
+        Notification::assertSentTo([$user], VerifyEmailNotification::class);
 
         $response->assertStatus(200);
 
@@ -58,20 +52,14 @@ class RegisterControllerTest extends TestCase
         $email = $this->faker->safeEmail;
         $password = $this->faker->password;
 
-        $this->postJson(
-            route('auth.register'),
-            [
-                'email' => $email,
-                'password' => $password,
-                'password_confirmation' => $password
-            ]
-        );
+        $this->postJson(route('auth.register'), [
+            'email' => $email,
+            'password' => $password,
+            'password_confirmation' => $password,
+        ]);
 
         $user = User::where('email', $email)->first();
 
-        Notification::assertSentTo(
-            [$user],
-            VerifyEmailNotification::class
-        );
+        Notification::assertSentTo([$user], VerifyEmailNotification::class);
     }
 }

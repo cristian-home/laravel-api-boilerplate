@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Console Commands
@@ -43,8 +42,5 @@ return [
     |
     */
 
-    'dont_alias' => [
-        'App\Nova',
-    ],
-
+    'dont_alias' => ['App\Nova'],
 ];

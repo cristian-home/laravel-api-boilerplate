@@ -43,10 +43,17 @@ class NewUserNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->subject(__('User created in :app.', ['app' => config('app.name')]))
+        return (new MailMessage())
+            ->subject(
+                __('User created in :app.', ['app' => config('app.name')]),
+            )
             ->greeting(__('Hello!'))
-            ->line(__('A user has been created in :app with this e-mail address.', ['app' => config('app.name')]))
+            ->line(
+                __(
+                    'A user has been created in :app with this e-mail address.',
+                    ['app' => config('app.name')],
+                ),
+            )
             ->action(__('Login to the website'), config('app.url'))
             ->line(__('Thank you for using our application!'));
     }
@@ -60,7 +67,7 @@ class NewUserNotification extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
-        ];
+                //
+            ];
     }
 }

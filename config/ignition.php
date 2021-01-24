@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Editor
@@ -83,7 +82,10 @@ return [
     |
     */
 
-    'enable_runnable_solutions' => env('IGNITION_ENABLE_RUNNABLE_SOLUTIONS', null),
+    'enable_runnable_solutions' => env(
+        'IGNITION_ENABLE_RUNNABLE_SOLUTIONS',
+        null,
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -121,5 +123,4 @@ return [
     |
     */
     'housekeeping_endpoint_prefix' => '_ignition',
-
 ];

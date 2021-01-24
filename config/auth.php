@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -120,5 +119,5 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'default_password' => env('DEFAULT_USER_PASSWORD', 'APP2021#')
+    'default_password' => env('DEFAULT_USER_PASSWORD', 'APP2021#'),
 ];

@@ -23,21 +23,16 @@ class VerificationControllerTest extends TestCase
     {
         Notification::fake();
 
-        $user = User::factory()->create(
-            [
-                'email_verified_at' => now(),
-                'remember_token' => null
-            ]
-        );
-
-        $response = $this->postJson(route('verification.resend'), [
-            "email" => $user->email
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+            'remember_token' => null,
         ]);
 
-        Notification::assertNotSentTo(
-            [$user],
-            VerifyEmailNotification::class
-        );
+        $response = $this->postJson(route('verification.resend'), [
+            'email' => $user->email,
+        ]);
+
+        Notification::assertNotSentTo([$user], VerifyEmailNotification::class);
 
         $response->assertStatus(200);
 
@@ -55,12 +50,10 @@ class VerificationControllerTest extends TestCase
 
         $notification = new VerifyEmailNotification();
 
-        $user = User::factory()->create(
-            [
-                'email_verified_at' => null,
-                'remember_token' => null
-            ]
-        );
+        $user = User::factory()->create([
+            'email_verified_at' => null,
+            'remember_token' => null,
+        ]);
 
         $signedURL = $notification->verificationURL($user);
 
@@ -82,21 +75,16 @@ class VerificationControllerTest extends TestCase
     {
         Notification::fake();
 
-        $user = User::factory()->create(
-            [
-                'email_verified_at' => null,
-                'remember_token' => null
-            ]
-        );
-
-        $response = $this->postJson(route('verification.resend'), [
-            "email" => $user->email
+        $user = User::factory()->create([
+            'email_verified_at' => null,
+            'remember_token' => null,
         ]);
 
-        Notification::assertSentTo(
-            [$user],
-            VerifyEmailNotification::class
-        );
+        $response = $this->postJson(route('verification.resend'), [
+            'email' => $user->email,
+        ]);
+
+        Notification::assertSentTo([$user], VerifyEmailNotification::class);
 
         $response->assertStatus(200);
 

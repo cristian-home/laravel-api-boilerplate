@@ -28,14 +28,14 @@ class VerifyEmailMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        $params = http_build_query(["signedurl" => $this->verificationURL]);
-        $pwaURL = route('pwa.verification.verify') . "?" . $params;
+        $params = http_build_query(['signedurl' => $this->verificationURL]);
+        $pwaURL = route('pwa.verification.verify') . '?' . $params;
 
         return $this->markdown('emails.users.verify')
             ->subject(__('Verify Email Address'))
             ->with([
-                "verificationURL" => $this->verificationURL,
-                "pwaURL" => $pwaURL
+                'verificationURL' => $this->verificationURL,
+                'pwaURL' => $pwaURL,
             ]);
     }
 }

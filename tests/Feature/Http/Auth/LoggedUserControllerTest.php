@@ -46,9 +46,12 @@ class LoggedUserControllerTest extends TestCase
      */
     public function testNonVerifiedAuthenticatedUserCheckAuth()
     {
-        $this->actingAs(User::factory()->create([
-            'email_verified_at' => null
-        ]), 'api');
+        $this->actingAs(
+            User::factory()->create([
+                'email_verified_at' => null,
+            ]),
+            'api',
+        );
 
         $response = $this->getJson(route('auth.check'));
 
@@ -70,11 +73,7 @@ class LoggedUserControllerTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonStructure([
-            'data' => [
-                'id',
-                'email',
-                'email_verified_at'
-            ]
+            'data' => ['id', 'email', 'email_verified_at'],
         ]);
     }
 
@@ -91,12 +90,14 @@ class LoggedUserControllerTest extends TestCase
 
         $this->withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
-        ])->getJson(route('auth.check'))
+        ])
+            ->getJson(route('auth.check'))
             ->assertSuccessful();
 
         $this->withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
-        ])->postJson(route('auth.logout'))
+        ])
+            ->postJson(route('auth.logout'))
             ->assertNoContent()
             ->assertSuccessful();
     }
@@ -106,13 +107,13 @@ class LoggedUserControllerTest extends TestCase
         $clientName = config('services.passport.oauth.clients.webapp.name');
 
         return Client::factory()->create([
-            "user_id" => null,
-            "name" => $clientName,
-            "provider" => "users",
-            "redirect" => "http://localhost",
-            "personal_access_client" => false,
-            "password_client" => true,
-            "revoked" => false,
+            'user_id' => null,
+            'name' => $clientName,
+            'provider' => 'users',
+            'redirect' => 'http://localhost',
+            'personal_access_client' => false,
+            'password_client' => true,
+            'revoked' => false,
         ]);
     }
 
@@ -120,7 +121,7 @@ class LoggedUserControllerTest extends TestCase
     {
         return User::factory()->create([
             'email' => $email,
-            'password' => Hash::make($password)
+            'password' => Hash::make($password),
         ]);
     }
 
@@ -132,12 +133,9 @@ class LoggedUserControllerTest extends TestCase
         $this->createOauthClient();
         $this->createUser($email, $password);
 
-        return $this->postJson(
-            route('auth.login'),
-            [
-                'email' => $email,
-                'password' => $password
-            ]
-        );
+        return $this->postJson(route('auth.login'), [
+            'email' => $email,
+            'password' => $password,
+        ]);
     }
 }

@@ -25,14 +25,14 @@ trait OAuthProxy
 
         // Validar que el cliente exista
         Validator::make(
-            ["cliente" => $clientName],
+            ['cliente' => $clientName],
             [
-                'cliente' => 'required|exists:oauth_clients,name'
+                'cliente' => 'required|exists:oauth_clients,name',
             ],
             [
-                'required' => __("No authentication client specified"),
-                'exists' => __("Invalid authentication client")
-            ]
+                'required' => __('No authentication client specified'),
+                'exists' => __('Invalid authentication client'),
+            ],
         )->validate();
 
         // Obtener el ultimo cliente OAuth creado con el nombre proporcionado
@@ -44,7 +44,7 @@ trait OAuthProxy
         $data = array_merge($data, [
             'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'grant_type' => $grantType
+            'grant_type' => $grantType,
         ]);
 
         // Crear Request OAuth
@@ -56,7 +56,7 @@ trait OAuthProxy
             [],
             [
                 'HTTP_ACCEPT' => 'application/json',
-            ]
+            ],
         );
 
         // Generar respuesta
@@ -64,15 +64,15 @@ trait OAuthProxy
 
         // Mostrar excepciones si ocurrieron
         switch (true) {
-            case ($response->status() >= 400):
+            case $response->status() >= 400:
                 return response()->json(
                     json_decode($response->getContent()),
-                    $response->status()
+                    $response->status(),
                 );
                 break;
 
-            case ($response->status() >= 500):
-                abort(503, __("The authentication server is not responding"));
+            case $response->status() >= 500:
+                abort(503, __('The authentication server is not responding'));
                 break;
 
             default:
@@ -91,15 +91,15 @@ trait OAuthProxy
             null,
             null,
             false,
-            true // HttpOnly
+            true, // HttpOnly
         );
 
         // Retornar respuesta con tokens
         return response()
             ->json([
-                "token_type" => $oauthData->token_type,
-                "expires_in" => $oauthData->expires_in,
-                "access_token" => $oauthData->access_token
+                'token_type' => $oauthData->token_type,
+                'expires_in' => $oauthData->expires_in,
+                'access_token' => $oauthData->access_token,
             ])
             ->withCookie($refreshTokenCookie);
     }

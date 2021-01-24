@@ -23,10 +23,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontFlash = [
-        'password',
-        'password_confirmation',
-    ];
+    protected $dontFlash = ['password', 'password_confirmation'];
 
     /**
      * Register the exception handling callbacks for the application.
@@ -47,8 +44,10 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Auth\AuthenticationException  $exception
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
+    protected function unauthenticated(
+        $request,
+        AuthenticationException $exception
+    ) {
         return $request->expectsJson()
             ? response()->json(['message' => __($exception->getMessage())], 401)
             : redirect()->guest($exception->redirectTo() ?? route('login'));
@@ -63,9 +62,12 @@ class Handler extends ExceptionHandler
      */
     protected function invalidJson($request, ValidationException $exception)
     {
-        return response()->json([
-            'message' => __($exception->getMessage()),
-            'errors' => $exception->errors(),
-        ], $exception->status);
+        return response()->json(
+            [
+                'message' => __($exception->getMessage()),
+                'errors' => $exception->errors(),
+            ],
+            $exception->status,
+        );
     }
 }

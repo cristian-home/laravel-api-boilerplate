@@ -58,11 +58,10 @@ class RegisterController extends Controller
 
         $this->registered($request, $user);
 
-
         return response()->json([
-            "message" => __("An email has been sent to :mail.", [
-                'mail' => $request->email
-            ])
+            'message' => __('An email has been sent to :mail.', [
+                'mail' => $request->email,
+            ]),
         ]);
     }
 
@@ -76,7 +75,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed'
+            'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
@@ -90,7 +89,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
         ]);
     }
 

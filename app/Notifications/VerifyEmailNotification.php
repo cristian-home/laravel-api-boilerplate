@@ -46,7 +46,7 @@ class VerifyEmailNotification extends Notification implements ShouldQueue
             return call_user_func(
                 static::$toMailCallback,
                 $notifiable,
-                $verificationURL
+                $verificationURL,
             );
         }
 
@@ -63,11 +63,13 @@ class VerifyEmailNotification extends Notification implements ShouldQueue
     {
         return URL::temporarySignedRoute(
             'verification.verify',
-            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
+            Carbon::now()->addMinutes(
+                Config::get('auth.verification.expire', 60),
+            ),
             [
                 'id' => $notifiable->getKey(),
-                'hash' => sha1($notifiable->getEmailForVerification())
-            ]
+                'hash' => sha1($notifiable->getEmailForVerification()),
+            ],
         );
     }
 

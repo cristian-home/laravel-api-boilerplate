@@ -39,14 +39,14 @@ class ProjectInit extends Command
     {
         $this->info('Creating .env file.');
         if (!file_exists('.env')) {
-            copy(".env.example", ".env");
+            copy('.env.example', '.env');
         }
         file_exists('.env')
             ? $this->info('✅ Success')
             : $this->error('❌ Error');
 
         $this->info('Creating sqlite database file.');
-        fopen("database/database.sqlite", "w");
+        fopen('database/database.sqlite', 'w');
         file_exists('database/database.sqlite')
             ? $this->info('✅ Success')
             : $this->error('❌ Error');

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Encryption Keys
@@ -62,5 +61,4 @@ return [
             'connection' => env('DB_CONNECTION', 'mysql'),
         ],
     ],
-
 ];

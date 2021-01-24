@@ -18,7 +18,9 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->default(Hash::make(env('DEFAULT_USER_PASSWORD', 'Password')));
+            $table
+                ->string('password')
+                ->default(Hash::make(env('DEFAULT_USER_PASSWORD', 'Password')));
             $table->rememberToken();
             $table->timestamps();
         });
