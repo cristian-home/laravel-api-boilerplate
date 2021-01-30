@@ -49,7 +49,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "custom/classes/Pluralizer.php"
+            "custom/doctrine/inflector/rules/spanish/Inflectible.php",
+            "custom/laravel/support/Pluralizer.php"
         ]
     },
     "autoload-dev": {
