@@ -19,8 +19,8 @@ class Inflectible
         // Linea personalizada para la palabra país|pais
         yield new Transformation(new Pattern('/^(pais|país)$/i'), '$1');
         // Default
-        yield new Transformation(new Pattern('/ereses$/'), 'erés');
-        yield new Transformation(new Pattern('/iones$/'), 'ión');
+        yield new Transformation(new Pattern('/ereses$/'), 'eres');
+        yield new Transformation(new Pattern('/iones$/'), 'ion');
         yield new Transformation(new Pattern('/ces$/'), 'z');
         yield new Transformation(new Pattern('/es$/'), '');
         yield new Transformation(new Pattern('/s$/'), '');
