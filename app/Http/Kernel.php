@@ -65,5 +65,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
         'to.lower' => \App\Http\Middleware\ToLowerCase::class,
+        // Google OTP
+        '2fa' => \PragmaRX\Google2FALaravel\MiddlewareStateless::class,
     ];
 }
