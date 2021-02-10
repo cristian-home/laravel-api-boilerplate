@@ -1,5 +1,7 @@
 <?php
 
+use Custom\OTP\OTPConstants;
+
 return [
     /*
      * Enable / disable Google2FA.
@@ -52,12 +54,12 @@ return [
     /*
      * User's table column for google2fa enabled.
      */
-    'otp_enabled_column' => 'otp_enabled',
+    'otp_enabled_column' => OTPConstants::OTP_ENABLED_COLUMN,
 
     /*
      * User's table column for google2fa secret.
      */
-    'otp_secret_column' => 'otp_secret',
+    'otp_secret_column' => OTPConstants::OTP_SECRET_COLUMN,
 
     /*
      * One Time Password View.

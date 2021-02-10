@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Custom\OTP\OTPConstants;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\VerifyEmailNotification;
@@ -33,7 +34,11 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+        OTPConstants::OTP_SECRET_COLUMN,
+    ];
 
     /**
      * The attributes that should be cast to native types.
@@ -42,6 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        OTPConstants::OTP_ENABLED_COLUMN => 'boolean',
     ];
 
     /**

@@ -54,7 +54,8 @@
         },
         "files": [
             "custom/doctrine/inflector/rules/spanish/Inflectible.php",
-            "custom/laravel/support/Pluralizer.php"
+            "custom/laravel/support/Pluralizer.php",
+            "custom/otp/OTPConstants.php"
         ]
     },
     "autoload-dev": {
