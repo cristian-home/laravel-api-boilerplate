@@ -51,5 +51,8 @@
     "Already authenticated": "Ya está autenticado",
     "User created in :app.": "Usuario creado en :app.",
     "A user has been created in :app with this e-mail address.": "Se ha creado un usuario en :app con esta dirección de correo eléctrónico.",
-    "Login to the website": "Entrar en el sitio web"
+    "Login to the website": "Entrar en el sitio web",
+    "The 'One Time Password' typed was wrong.": "El código introducido es incorrecto",
+    "One Time Password cannot be empty.": "El código no puede estar vacío",
+    "An unknown error has occurred. Please try again.": "Se ha producido un error desconocido. Por favor, inténtelo de nuevo"
 }
