@@ -22,9 +22,10 @@ class CreateUsersTable extends Migration
             $table
                 ->string('password')
                 ->default(Hash::make(env('DEFAULT_USER_PASSWORD', 'Password')));
-            $table->boolean(OTPConstants::OTP_ENABLED_COLUMN)->default(false);
-            $table->string(OTPConstants::OTP_SECRET_COLUMN)->nullable();
             $table->rememberToken();
+            $table->boolean(OTPConstants::OTP_ENABLED_COLUMN)->default(false);
+            $table->text(OTPConstants::OTP_SECRET_COLUMN)->nullable();
+            $table->text(OTPConstants::OTP_RECOVERY_CODES_COLUMN)->nullable();
             $table->timestamps();
         });
     }
