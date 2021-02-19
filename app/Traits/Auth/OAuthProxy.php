@@ -17,6 +17,7 @@ trait OAuthProxy
      *
      * @param string $grantType el tipo de Grant que se solicita
      * @param array $data los datos que se envian al servidor
+     * @return \Illuminate\Http\JsonResponse
      */
     private function proxy(string $grantType, array $data = [])
     {

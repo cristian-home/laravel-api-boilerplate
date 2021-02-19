@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use Illuminate\Support\Facades\Cookie;
 use Laravel\Passport\TokenRepository;
+use Illuminate\Support\Facades\Cookie;
 use Laravel\Passport\RefreshTokenRepository;
 
 class LoggedUserController extends Controller
@@ -28,7 +28,7 @@ class LoggedUserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function checkAuth()
+    public function checkAuth(Request $request)
     {
         return response()->json(null, 204);
     }

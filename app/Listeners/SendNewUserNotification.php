@@ -3,9 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\NewUser;
+use Illuminate\Queue\InteractsWithQueue;
 use App\Notifications\NewUserNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 
 class SendNewUserNotification implements ShouldQueue
