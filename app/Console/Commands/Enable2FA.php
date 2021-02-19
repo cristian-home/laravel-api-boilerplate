@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use Arr;
 use App\Models\User;
 use Custom\OTP\OTPConstants;
 use Illuminate\Console\Command;
+use PragmaRX\Recovery\Recovery;
 
 class Enable2FA extends Command
 {
@@ -61,7 +63,7 @@ class Enable2FA extends Command
 
         if ($user->{OTPConstants::OTP_ENABLED_COLUMN}) {
             $this->error(
-                'The user already has two-step authentication enabled.',
+                'The user already has two-factor authentication enabled.',
             );
 
             $this->info('Use the 2fa:reauthenticate command instead.');
@@ -85,20 +87,35 @@ class Enable2FA extends Command
         // initialise the 2FA class
         $google2fa = app('pragmarx.google2fa');
 
-        // generate a new secret key for the user
-        $user->{OTPConstants::OTP_SECRET_COLUMN} = $google2fa->generateSecretKey();
+        $recovery = new Recovery();
 
         // Mark 2fa as enabled for the user
         $user->{OTPConstants::OTP_ENABLED_COLUMN} = true;
+        // generate a new secret key for the user
+        $user->{OTPConstants::OTP_SECRET_COLUMN} = $google2fa->generateSecretKey();
+        $user->{OTPConstants::OTP_RECOVERY_CODES_COLUMN} = $recovery->toArray();
 
         // save the user
         $user->save();
 
         // show the new secret key
         $this->info('A new secret has been generated for ' . $user->email);
-        $this->info(
-            'The new secret is: ' . $user->{OTPConstants::OTP_SECRET_COLUMN},
+
+        $this->table(
+            ['User OTP secret'],
+            [['secret' => $user->{OTPConstants::OTP_SECRET_COLUMN}]],
         );
+
+        $table_codes = [];
+
+        foreach (
+            $user->{OTPConstants::OTP_RECOVERY_CODES_COLUMN}
+            as $key => $code
+        ) {
+            $table_codes = Arr::add($table_codes, $key, ['code' => $code]);
+        }
+
+        $this->table(['Recovery codes'], $table_codes);
 
         return 0;
     }

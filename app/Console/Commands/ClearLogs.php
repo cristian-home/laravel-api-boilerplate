@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class ClearAll extends Command
+class ClearLogs extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'clear:all';
+    protected $signature = 'logs:clear';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Limpiar caches';
+    protected $description = 'CLear all Laravel logs';
 
     /**
      * Create a new command instance.
@@ -37,13 +37,17 @@ class ClearAll extends Command
      */
     public function handle()
     {
-        $this->info('Clear all caches.');
-        $this->call('cache:clear');
-        $this->call('route:clear');
-        $this->call('config:clear');
-        $this->call('view:clear');
-        $this->call('logs:clear');
-        $this->call('clear-compiled');
+        $file_list = glob(
+            './storage/{,*/,*/*/,*/*/*/,*/*/*/*/}*.log',
+            GLOB_BRACE,
+        );
+
+        foreach ($file_list as $key => $file) {
+            $this->comment("Removing $file");
+            exec('rm ' . $file);
+        }
+
+        $this->info('Logs have been cleared!');
 
         return 0;
     }

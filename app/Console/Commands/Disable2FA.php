@@ -75,8 +75,9 @@ class Disable2FA extends Command
         }
 
         // Disabled 2fa for the user
+        $user->{OTPConstants::OTP_ENABLED_COLUMN} = false;
         $user->{OTPConstants::OTP_SECRET_COLUMN} = null;
-        $user->{config(OTPConstants::OTP_ENABLED_COLUMN)} = false;
+        $user->{OTPConstants::OTP_RECOVERY_CODES_COLUMN} = null;
 
         // save the user
         $user->save();
