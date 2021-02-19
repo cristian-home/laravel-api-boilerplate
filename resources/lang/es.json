@@ -53,6 +53,15 @@
     "A user has been created in :app with this e-mail address.": "Se ha creado un usuario en :app con esta dirección de correo eléctrónico.",
     "Login to the website": "Entrar en el sitio web",
     "The 'One Time Password' typed was wrong.": "El código introducido es incorrecto",
+    "The 'Recovery Code' typed was wrong.": "El código de recuperación introducido es incorrecto",
     "One Time Password cannot be empty.": "El código no puede estar vacío",
-    "An unknown error has occurred. Please try again.": "Se ha producido un error desconocido. Por favor, inténtelo de nuevo"
+    "An unknown error has occurred. Please try again.": "Se ha producido un error desconocido. Por favor, inténtelo de nuevo",
+    "The user already has two-factor authentication enabled.": "El usuario ya tiene la autenticación de dos pasos habilidata.",
+    "The user does not have two-factor authentication enabled.": "El usuario no tiene habilitada la autenticación de dos pasos.",
+    "The request to enable two-factor authentication has expired.": "La solicitud para activar la autenticación de dos factores ha expirado.",
+    "Two-factor authentication enabled.": "Autenticación de dos pasos habilitada.",
+    "Two-factor authentication disabled.": "Autenticación de dos pasos deshabilitada.",
+    "Two-factor authentication has been enabled for your account.": "Se ha habilitado la autenticación de dos pasos para esta cuenta.",
+    "Two-factor authentication has been disabled for your account.": "Se ha deshabilitado la autenticación de dos pasos para esta cuenta.",
+    "If you did not perform this action please contact your system administrator.": "Si tu no realizaste esta acción por favor comunícate con el administrador del sistema."
 }
