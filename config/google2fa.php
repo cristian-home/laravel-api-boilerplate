@@ -39,7 +39,12 @@ return [
     /*
      * One Time Password request input name.
      */
-    'otp_input' => 'one_time_password',
+    'otp_input' => OTPConstants::OTP_INPUT_FIELD,
+
+    /*
+     * Recovery Code request input name.
+     */
+    'recovery_code_input' => OTPConstants::RECOVERY_CODE_INPUT_FIELD,
 
     /*
      * One Time Password Window.
@@ -62,6 +67,11 @@ return [
     'otp_secret_column' => OTPConstants::OTP_SECRET_COLUMN,
 
     /*
+     * User's table column for google2fa recovery codes.
+     */
+    'otp_recovery_codes_column' => OTPConstants::OTP_RECOVERY_CODES_COLUMN,
+
+    /*
      * One Time Password View.
      */
     'view' => 'google2fa.index',
@@ -71,6 +81,7 @@ return [
      */
     'error_messages' => [
         'wrong_otp' => "The 'One Time Password' typed was wrong.",
+        'wrong_recovery' => "The 'Recovery Code' typed was wrong.",
         'cannot_be_empty' => 'One Time Password cannot be empty.',
         'unknown' => 'An unknown error has occurred. Please try again.',
     ],
