@@ -3,11 +3,14 @@
 namespace App\Providers;
 
 use App\Events\NewUser;
-use App\Listeners\SendNewUserNotification;
 use Illuminate\Auth\Events\Registered;
+use App\Events\TwoFactorAuthEnabledEvent;
+use App\Events\TwoFactorAuthDisabledEvent;
+use App\Listeners\SendNewUserNotification;
+use App\Listeners\SendTwoFactorAuthEnabledNotification;
+use App\Listeners\SendTwoFactorAuthDisabledNotification;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,8 +20,14 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [SendEmailVerificationNotification::class],
         NewUser::class => [SendNewUserNotification::class],
+        Registered::class => [SendEmailVerificationNotification::class],
+        TwoFactorAuthEnabledEvent::class => [
+            SendTwoFactorAuthEnabledNotification::class,
+        ],
+        TwoFactorAuthDisabledEvent::class => [
+            SendTwoFactorAuthDisabledNotification::class,
+        ],
     ];
 
     /**
