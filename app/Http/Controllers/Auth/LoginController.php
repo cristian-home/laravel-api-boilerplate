@@ -29,7 +29,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('to.lower')->only(['login']);
+        $this->middleware(['to.lower', '2fa:after'])->only(['login']);
         $this->middleware('auth:api')->only(['logout']);
         $this->middleware('guest:api')->except([
             'logout',
@@ -80,7 +80,7 @@ class LoginController extends Controller
         // Limpiar contador de intentos de incio de sesión
         $this->clearLoginAttempts($request);
 
-        // Hacer petición al proxy y devolver los tokens
+        // Hacer petición al proxy y devolver los tokens de acceso y refresco
         return $this->proxy('password', [
             'username' => $request->email,
             'password' => $request->password,

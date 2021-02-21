@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoggedUserController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\TwoFactorAuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
@@ -20,31 +21,47 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 |
 */
 
-// Authentication Routes
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
+
 Route::post('login', [LoginController::class, 'login'])->name('auth.login');
+
 Route::post('register', [RegisterController::class, 'register'])->name(
     'auth.register',
 );
+
 Route::post('logout', [LoggedUserController::class, 'logout'])->name(
     'auth.logout',
 );
+
 Route::get('auth-check', [LoggedUserController::class, 'checkAuth'])->name(
     'auth.check',
 );
+
 Route::get('current-user', [
     LoggedUserController::class,
     'getCurrentUser',
 ])->name('auth.user');
+
 Route::post('refresh-token', [
     LoginController::class,
     'refreshAccessToken',
 ])->name('auth.refresh');
 
-// Email Verification Routes
+/*
+|--------------------------------------------------------------------------
+| Email Verification Routes
+|--------------------------------------------------------------------------
+*/
+
 Route::get('verification/verify', [
     VerificationController::class,
     'verify',
 ])->name('verification.verify');
+
 Route::post('verification/resend', [
     VerificationController::class,
     'resend',
@@ -55,9 +72,35 @@ Route::post('password/email', [
     ForgotPasswordController::class,
     'sendResetLinkEmail',
 ])->name('password.email');
+
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name(
     'password.update',
 );
+
+/*
+|--------------------------------------------------------------------------
+| Two Factor Authentication Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('request-enable-2fa', [
+    TwoFactorAuthController::class,
+    'requestEnable2FA',
+])->name('auth.2fa.enablerequest');
+
+Route::post('enable-2fa', [TwoFactorAuthController::class, 'enable2FA'])->name(
+    'auth.2fa.enable',
+);
+
+Route::post('disable-2fa', [
+    TwoFactorAuthController::class,
+    'disable2FA',
+])->name('auth.2fa.disable');
+
+Route::get('2fa-qr-code', [
+    TwoFactorAuthController::class,
+    'getInlineQRCode',
+])->name('auth.2fa.qrcode');
 
 // Users
 Route::apiResource('users', UsersController::class);

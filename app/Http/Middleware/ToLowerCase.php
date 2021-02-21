@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Custom\OTP\OTPConstants;
 use Illuminate\Http\Request;
 
 class ToLowerCase
@@ -16,7 +17,12 @@ class ToLowerCase
      */
     public function handle(Request $request, Closure $next)
     {
-        $except = ['password', 'password_confirmation'];
+        $except = [
+            'password',
+            'password_confirmation',
+            OTPConstants::OTP_INPUT_FIELD,
+            OTPConstants::RECOVERY_CODE_INPUT_FIELD,
+        ];
 
         foreach ($request->all() as $key => $value) {
             if (is_string($value)) {

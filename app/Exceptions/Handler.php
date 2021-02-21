@@ -2,10 +2,12 @@
 
 namespace App\Exceptions;
 
+use Arr;
+use Throwable;
+use Custom\OTP\OTPConstants;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -62,12 +64,18 @@ class Handler extends ExceptionHandler
      */
     protected function invalidJson($request, ValidationException $exception)
     {
-        return response()->json(
-            [
-                'message' => __($exception->getMessage()),
-                'errors' => $exception->errors(),
-            ],
-            $exception->status,
-        );
+        $errors_msg = $exception->errors();
+
+        $data = [];
+
+        if (Arr::has($errors_msg, OTPConstants::OTP_REQUIRED_STR)) {
+            $errors = Arr::pull($errors_msg, OTPConstants::OTP_REQUIRED_STR);
+            $data[OTPConstants::OTP_REQUIRED_STR] = $errors[0];
+        }
+
+        $data['message'] = __($exception->getMessage());
+        $data['errors'] = $errors_msg;
+
+        return response()->json($data, $exception->status);
     }
 }

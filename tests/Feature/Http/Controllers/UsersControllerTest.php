@@ -119,11 +119,7 @@ class UsersControllerTest extends TestCase
 
         event($event);
 
-        Notification::assertSentTo($user, NewUserNotification::class, function (
-            $notification
-        ) use ($user) {
-            return $notification->user->is($user);
-        });
+        Notification::assertSentTo($user, NewUserNotification::class);
     }
 
     /**

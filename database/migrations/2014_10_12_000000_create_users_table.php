@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Custom\OTP\OTPConstants;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
@@ -22,6 +23,9 @@ class CreateUsersTable extends Migration
                 ->string('password')
                 ->default(Hash::make(env('DEFAULT_USER_PASSWORD', 'Password')));
             $table->rememberToken();
+            $table->boolean(OTPConstants::OTP_ENABLED_COLUMN)->default(false);
+            $table->text(OTPConstants::OTP_SECRET_COLUMN)->nullable();
+            $table->text(OTPConstants::OTP_RECOVERY_CODES_COLUMN)->nullable();
             $table->timestamps();
         });
     }

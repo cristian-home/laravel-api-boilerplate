@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "bacon/bacon-qr-code": "^2.0",
         "beyondcode/laravel-websockets": "^1.9",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -18,6 +19,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
         "laraveles/spanish": "^1.5",
+        "pragmarx/google2fa-laravel": "^1.4",
+        "pragmarx/recovery": "^0.1.0",
         "spatie/laravel-permission": "^3.18",
         "symfony/yaml": "^5.2"
     },
@@ -51,7 +54,8 @@
         },
         "files": [
             "custom/doctrine/inflector/rules/spanish/Inflectible.php",
-            "custom/laravel/support/Pluralizer.php"
+            "custom/laravel/support/Pluralizer.php",
+            "custom/otp/OTPConstants.php"
         ]
     },
     "autoload-dev": {

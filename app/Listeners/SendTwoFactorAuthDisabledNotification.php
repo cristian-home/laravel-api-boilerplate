@@ -2,13 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\NewUser;
+use App\Notifications\TwoFactorAuthDisabledNotification;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Notifications\NewUserNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Notification;
+use Notification;
 
-class SendNewUserNotification implements ShouldQueue
+class SendTwoFactorAuthDisabledNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -23,11 +22,14 @@ class SendNewUserNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  NewUser  $event
+     * @param  object  $event
      * @return void
      */
-    public function handle(NewUser $event)
+    public function handle($event)
     {
-        Notification::send($event->user, new NewUserNotification($event->user));
+        Notification::send(
+            $event->user,
+            new TwoFactorAuthDisabledNotification ($event->user),
+        );
     }
 }

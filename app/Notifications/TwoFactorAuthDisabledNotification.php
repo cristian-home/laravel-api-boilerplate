@@ -2,29 +2,31 @@
 
 namespace App\Notifications;
 
+use App\Mail\TwoFactorAuthDisabledMail;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewUserNotification extends Notification implements ShouldQueue
+class TwoFactorAuthDisabledNotification extends Notification implements
+    ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable;
 
     /**
-     * Create a new message instance.
+     * Create a new notification instance.
      *
      * @return void
      */
     public function __construct()
     {
+        //
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -35,30 +37,18 @@ class NewUserNotification extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage())
-            ->subject(
-                __('User created in :app.', ['app' => config('app.name')]),
-            )
-            ->greeting(__('Hello!'))
-            ->line(
-                __(
-                    'A user has been created in :app with this e-mail address.',
-                    ['app' => config('app.name')],
-                ),
-            )
-            ->action(__('Login to the website'), config('app.url'))
-            ->line(__('Thank you for using our application!'));
+        return (new TwoFactorAuthDisabledMail())->to($notifiable);
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)
