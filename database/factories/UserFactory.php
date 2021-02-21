@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'password' => Hash::make($this->faker->password),
             OTPConstants::OTP_ENABLED_COLUMN => false,
             OTPConstants::OTP_SECRET_COLUMN => null,
+            OTPConstants::OTP_RECOVERY_CODES_COLUMN => null,
             'remember_token' => Str::random(10),
         ];
     }
