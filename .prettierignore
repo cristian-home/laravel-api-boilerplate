@@ -34,6 +34,8 @@
 
 # Excluir ide helper
 _ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
 
 # Include specific file extensions if they appear under a "src" folder
 # !/*/*/src/**/*.ts
