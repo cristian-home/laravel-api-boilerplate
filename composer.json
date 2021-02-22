@@ -15,6 +15,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
+        "laravel/horizon": "^5.7",
         "laravel/passport": "^10.1",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
@@ -22,6 +23,7 @@
         "laraveles/spanish": "^1.5",
         "pragmarx/google2fa-laravel": "^1.4",
         "pragmarx/recovery": "^0.1.0",
+        "predis/predis": "^1.1",
         "spatie/laravel-permission": "^3.18",
         "symfony/yaml": "^5.2"
     },
