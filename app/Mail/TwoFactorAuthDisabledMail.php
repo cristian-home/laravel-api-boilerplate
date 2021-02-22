@@ -29,8 +29,8 @@ class TwoFactorAuthDisabledMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.users.two-factor-auth-disabled')->subject(
-            Lang::get('Two-factor authentication disabled.'),
-        );
+        return $this->markdown(
+            'emails.users.two-factor-auth-disabled',
+        )->subject(Lang::get('Two-factor authentication disabled.'));
     }
 }

@@ -19,6 +19,12 @@
 # Excluir cache
 /bootstrap/cache/
 
+# Excluir Stubs
+/stubs/
+
+# Excluir Docker
+/docker/
+
 # Excluir todos los archivos
 *.*
 

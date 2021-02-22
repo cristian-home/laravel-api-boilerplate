@@ -14,7 +14,7 @@ class Inflectible
     /**
      * @return Transformation[]
      */
-    public static function getSingular() : iterable
+    public static function getSingular(): iterable
     {
         // Linea personalizada para la palabra país|pais
         yield new Transformation(new Pattern('/^(pais|país)$/i'), '$1');
@@ -29,7 +29,7 @@ class Inflectible
     /**
      * @return Transformation[]
      */
-    public static function getPlural() : iterable
+    public static function getPlural(): iterable
     {
         // Linea personalizada para la palabra país|pais
         yield new Transformation(new Pattern('/^(pais|país)$/i'), '\1es');
@@ -48,7 +48,7 @@ class Inflectible
     /**
      * @return Substitution[]
      */
-    public static function getIrregular() : iterable
+    public static function getIrregular(): iterable
     {
         yield new Substitution(new Word('el'), new Word('los'));
         yield new Substitution(new Word('papá'), new Word('papás'));

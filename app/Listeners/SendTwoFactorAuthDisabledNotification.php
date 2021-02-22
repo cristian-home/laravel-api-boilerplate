@@ -29,7 +29,7 @@ class SendTwoFactorAuthDisabledNotification implements ShouldQueue
     {
         Notification::send(
             $event->user,
-            new TwoFactorAuthDisabledNotification ($event->user),
+            new TwoFactorAuthDisabledNotification($event->user),
         );
     }
 }
