@@ -57,20 +57,25 @@ class CreateTelescopeEntriesTable extends Migration
             $table->index(['type', 'should_display_on_index']);
         });
 
-        $this->schema->create('telescope_entries_tags', function (Blueprint $table) {
+        $this->schema->create('telescope_entries_tags', function (
+            Blueprint $table
+        ) {
             $table->uuid('entry_uuid');
             $table->string('tag');
 
             $table->index(['entry_uuid', 'tag']);
             $table->index('tag');
 
-            $table->foreign('entry_uuid')
-                  ->references('uuid')
-                  ->on('telescope_entries')
-                  ->onDelete('cascade');
+            $table
+                ->foreign('entry_uuid')
+                ->references('uuid')
+                ->on('telescope_entries')
+                ->onDelete('cascade');
         });
 
-        $this->schema->create('telescope_monitoring', function (Blueprint $table) {
+        $this->schema->create('telescope_monitoring', function (
+            Blueprint $table
+        ) {
             $table->string('tag');
         });
     }
