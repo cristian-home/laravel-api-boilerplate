@@ -29,7 +29,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['to.lower', '2fa:after'])->only(['login']);
+        $this->middleware(['to.lower', '2fa.api:after'])->only(['login']);
         $this->middleware('auth:api')->only(['logout']);
         $this->middleware('guest:api')->except([
             'logout',

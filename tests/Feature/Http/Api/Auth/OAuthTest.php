@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Auth;
+namespace Tests\Feature\Http\Api\Auth;
 
 use Hash;
 use Tests\TestCase;

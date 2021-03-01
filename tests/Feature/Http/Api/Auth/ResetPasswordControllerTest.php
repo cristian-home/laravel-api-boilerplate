@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Auth;
+namespace Tests\Feature\Http\Api\Auth;
 
 use Hash;
 use Password;
@@ -27,7 +27,7 @@ class ResetPasswordControllerTest extends TestCase
 
         $newPassword = $this->faker->password;
 
-        $response = $this->postJson(route('password.update'), [
+        $response = $this->postJson(route('api.password.update'), [
             'token' => $token,
             'email' => $user->email,
             'password' => $newPassword,
@@ -57,7 +57,7 @@ class ResetPasswordControllerTest extends TestCase
 
         $newPassword = $this->faker->password;
 
-        $response = $this->postJson(route('password.update'), [
+        $response = $this->postJson(route('api.password.update'), [
             'token' => $token,
             'email' => $user1->email,
             'password' => $newPassword,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Auth;
+namespace Tests\Feature\Http\Api\Auth;
 
 use Tests\TestCase;
 use App\Models\User;
@@ -22,7 +22,7 @@ class ForgotPasswordControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->postJson(route('password.email'), [
+        $response = $this->postJson(route('api.password.email'), [
             'email' => $user->email,
         ]);
 
@@ -42,7 +42,7 @@ class ForgotPasswordControllerTest extends TestCase
 
         $user = User::factory()->create();
 
-        $this->postJson(route('password.email'), [
+        $this->postJson(route('api.password.email'), [
             'email' => $user->email,
         ]);
 

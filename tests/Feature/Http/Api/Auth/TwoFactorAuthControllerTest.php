@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Auth;
+namespace Tests\Feature\Http\Api\Auth;
 
 use Google2FA;
 use Tests\TestCase;
@@ -23,7 +23,7 @@ class TwoFactorAuthControllerTest extends TestCase
     {
         $this->actingAs(User::factory()->create(), 'api');
 
-        $response = $this->getJson(route('auth.2fa.enablerequest'));
+        $response = $this->getJson(route('api.auth.2fa.enablerequest'));
 
         $response->assertStatus(200);
 
@@ -46,7 +46,7 @@ class TwoFactorAuthControllerTest extends TestCase
             'api',
         );
 
-        $response = $this->getJson(route('auth.2fa.enablerequest'));
+        $response = $this->getJson(route('api.auth.2fa.enablerequest'));
 
         $response->assertStatus(422);
 
@@ -63,7 +63,7 @@ class TwoFactorAuthControllerTest extends TestCase
         $this->actingAs(User::factory()->create(), 'api');
 
         // Gnerar secret temporal
-        $requestResponse = $this->getJson(route('auth.2fa.enablerequest'));
+        $requestResponse = $this->getJson(route('api.auth.2fa.enablerequest'));
 
         // Inicializar la clase 2FA
         $google2fa = app('pragmarx.google2fa');
@@ -72,7 +72,7 @@ class TwoFactorAuthControllerTest extends TestCase
         $otp = $google2fa->getCurrentOtp($requestResponse['otp_secret']);
 
         // Hacer petición a endpoint para habilitar 2FA
-        $response = $this->postJson(route('auth.2fa.enable'), [
+        $response = $this->postJson(route('api.auth.2fa.enable'), [
             OTPConstants::OTP_INPUT_FIELD => $otp,
         ]);
 

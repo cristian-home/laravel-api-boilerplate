@@ -1,17 +1,17 @@
 <?php
 
-namespace Tests\Feature\Http\Auth;
+namespace Tests\Feature\Http\Api\Auth;
 
 use Arr;
 use Hash;
+use Google2FA;
 use Tests\TestCase;
 use App\Models\User;
 use Custom\OTP\OTPConstants;
-use Google2FA;
 use Laravel\Passport\Client;
+use PragmaRX\Recovery\Recovery;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PragmaRX\Recovery\Recovery;
 
 class LoginControllerTest extends TestCase
 {
@@ -120,7 +120,7 @@ class LoginControllerTest extends TestCase
 
         $refreshResponse = $this->call(
             'POST',
-            route('auth.refresh'),
+            route('api.auth.refresh'),
             [],
             $cookies,
         );
@@ -157,7 +157,7 @@ class LoginControllerTest extends TestCase
         $this->createOauthClient();
         $this->createUser($email, $password);
 
-        return $this->postJson(route('auth.login'), [
+        return $this->postJson(route('api.auth.login'), [
             'email' => $email,
             'password' => $password,
         ]);
@@ -199,7 +199,7 @@ class LoginControllerTest extends TestCase
 
         $data = Arr::add($data, $key, $value);
 
-        return $this->postJson(route('auth.login'), $data);
+        return $this->postJson(route('api.auth.login'), $data);
     }
 
     protected function createUser($email, $password, $enabled2fa = false)

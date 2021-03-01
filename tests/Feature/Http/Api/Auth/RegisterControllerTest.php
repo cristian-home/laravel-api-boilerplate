@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Http\Auth;
+namespace Tests\Feature\Http\Api\Auth;
 
+use Tests\TestCase;
 use App\Models\User;
-use App\Notifications\VerifyEmailNotification;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
-use Tests\TestCase;
+use App\Notifications\VerifyEmailNotification;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegisterControllerTest extends TestCase
 {
@@ -25,7 +25,7 @@ class RegisterControllerTest extends TestCase
         $email = $this->faker->safeEmail;
         $password = $this->faker->password;
 
-        $response = $this->postJson(route('auth.register'), [
+        $response = $this->postJson(route('api.auth.register'), [
             'email' => $email,
             'password' => $password,
             'password_confirmation' => $password,
@@ -52,7 +52,7 @@ class RegisterControllerTest extends TestCase
         $email = $this->faker->safeEmail;
         $password = $this->faker->password;
 
-        $this->postJson(route('auth.register'), [
+        $this->postJson(route('api.auth.register'), [
             'email' => $email,
             'password' => $password,
             'password_confirmation' => $password,

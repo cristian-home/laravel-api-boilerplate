@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Http\Auth;
+namespace Tests\Feature\Http\Api\Auth;
 
-use App\Models\User;
 use Hash;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Passport\Client;
 use Tests\TestCase;
+use App\Models\User;
+use Laravel\Passport\Client;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoggedUserControllerTest extends TestCase
 {
@@ -22,7 +22,7 @@ class LoggedUserControllerTest extends TestCase
     {
         $this->actingAs(User::factory()->create(), 'api');
 
-        $response = $this->getJson(route('auth.check'));
+        $response = $this->getJson(route('api.auth.check'));
 
         $response->assertSuccessful();
     }
@@ -34,7 +34,7 @@ class LoggedUserControllerTest extends TestCase
      */
     public function testUnauthenticatedUserCheckAuth()
     {
-        $response = $this->getJson(route('auth.check'));
+        $response = $this->getJson(route('api.auth.check'));
 
         $response->assertUnauthorized();
     }
@@ -53,7 +53,7 @@ class LoggedUserControllerTest extends TestCase
             'api',
         );
 
-        $response = $this->getJson(route('auth.check'));
+        $response = $this->getJson(route('api.auth.check'));
 
         $response->assertForbidden();
     }
@@ -69,7 +69,7 @@ class LoggedUserControllerTest extends TestCase
 
         $this->actingAs($user, 'api');
 
-        $response = $this->getJson(route('auth.user'));
+        $response = $this->getJson(route('api.auth.user'));
 
         $response->assertOk();
         $response->assertJsonStructure([
@@ -91,13 +91,13 @@ class LoggedUserControllerTest extends TestCase
         $this->withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
         ])
-            ->getJson(route('auth.check'))
+            ->getJson(route('api.auth.check'))
             ->assertSuccessful();
 
         $this->withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
         ])
-            ->postJson(route('auth.logout'))
+            ->postJson(route('api.auth.logout'))
             ->assertNoContent()
             ->assertSuccessful();
     }
@@ -133,7 +133,7 @@ class LoggedUserControllerTest extends TestCase
         $this->createOauthClient();
         $this->createUser($email, $password);
 
-        return $this->postJson(route('auth.login'), [
+        return $this->postJson(route('api.auth.login'), [
             'email' => $email,
             'password' => $password,
         ]);

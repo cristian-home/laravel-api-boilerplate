@@ -27,80 +27,84 @@ use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 |--------------------------------------------------------------------------
 */
 
-Route::post('login', [LoginController::class, 'login'])->name('auth.login');
+Route::name('api.')->group(function () {
+    Route::post('login', [LoginController::class, 'login'])->name('auth.login');
 
-Route::post('register', [RegisterController::class, 'register'])->name(
-    'auth.register',
-);
+    Route::post('register', [RegisterController::class, 'register'])->name(
+        'auth.register',
+    );
 
-Route::post('logout', [LoggedUserController::class, 'logout'])->name(
-    'auth.logout',
-);
+    Route::post('logout', [LoggedUserController::class, 'logout'])->name(
+        'auth.logout',
+    );
 
-Route::get('auth-check', [LoggedUserController::class, 'checkAuth'])->name(
-    'auth.check',
-);
+    Route::get('auth-check', [LoggedUserController::class, 'checkAuth'])->name(
+        'auth.check',
+    );
 
-Route::get('current-user', [
-    LoggedUserController::class,
-    'getCurrentUser',
-])->name('auth.user');
+    Route::get('current-user', [
+        LoggedUserController::class,
+        'getCurrentUser',
+    ])->name('auth.user');
 
-Route::post('refresh-token', [
-    LoginController::class,
-    'refreshAccessToken',
-])->name('auth.refresh');
+    Route::post('refresh-token', [
+        LoginController::class,
+        'refreshAccessToken',
+    ])->name('auth.refresh');
 
-/*
+    /*
 |--------------------------------------------------------------------------
 | Email Verification Routes
 |--------------------------------------------------------------------------
 */
 
-Route::get('verification/verify', [
-    VerificationController::class,
-    'verify',
-])->name('verification.verify');
+    Route::get('verification/verify', [
+        VerificationController::class,
+        'verify',
+    ])->name('verification.verify');
 
-Route::post('verification/resend', [
-    VerificationController::class,
-    'resend',
-])->name('verification.resend');
+    Route::post('verification/resend', [
+        VerificationController::class,
+        'resend',
+    ])->name('verification.resend');
 
-// Reset Password Routes
-Route::post('password/email', [
-    ForgotPasswordController::class,
-    'sendResetLinkEmail',
-])->name('password.email');
+    // Reset Password Routes
+    Route::post('password/email', [
+        ForgotPasswordController::class,
+        'sendResetLinkEmail',
+    ])->name('password.email');
 
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name(
-    'password.update',
-);
+    Route::post('password/reset', [
+        ResetPasswordController::class,
+        'reset',
+    ])->name('password.update');
 
-/*
+    /*
 |--------------------------------------------------------------------------
 | Two Factor Authentication Routes
 |--------------------------------------------------------------------------
 */
 
-Route::get('request-enable-2fa', [
-    TwoFactorAuthController::class,
-    'requestEnable2FA',
-])->name('auth.2fa.enablerequest');
+    Route::get('request-enable-2fa', [
+        TwoFactorAuthController::class,
+        'requestEnable2FA',
+    ])->name('auth.2fa.enablerequest');
 
-Route::post('enable-2fa', [TwoFactorAuthController::class, 'enable2FA'])->name(
-    'auth.2fa.enable',
-);
+    Route::post('enable-2fa', [
+        TwoFactorAuthController::class,
+        'enable2FA',
+    ])->name('auth.2fa.enable');
 
-Route::post('disable-2fa', [
-    TwoFactorAuthController::class,
-    'disable2FA',
-])->name('auth.2fa.disable');
+    Route::post('disable-2fa', [
+        TwoFactorAuthController::class,
+        'disable2FA',
+    ])->name('auth.2fa.disable');
 
-Route::get('2fa-qr-code', [
-    TwoFactorAuthController::class,
-    'getInlineQRCode',
-])->name('auth.2fa.qrcode');
+    Route::get('2fa-qr-code', [
+        TwoFactorAuthController::class,
+        'getInlineQRCode',
+    ])->name('auth.2fa.qrcode');
+});
 
 // Users
 Route::apiResource('users', UsersController::class);

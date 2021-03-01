@@ -26,7 +26,9 @@ class TwoFactorAuthController extends Controller
             'requestEnable2FA',
             'enable2FA',
         ]);
-        $this->middleware(['2fa', '2fa.status:enabled'])->only(['disable2FA']);
+        $this->middleware(['2fa.api', '2fa.status:enabled'])->only([
+            'disable2FA',
+        ]);
         $this->middleware('2fa.status:enabled')->only('getInlineQRCode');
     }
 

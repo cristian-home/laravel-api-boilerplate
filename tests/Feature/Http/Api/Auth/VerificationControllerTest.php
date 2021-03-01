@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Feature\Http\Auth;
+namespace Tests\Feature\Http\Api\Auth;
 
-use App\Mail\VerifyEmailMail;
+use Tests\TestCase;
 use App\Models\User;
-use App\Notifications\VerifyEmailNotification;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Mail\VerifyEmailMail;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
-use Tests\TestCase;
+use App\Notifications\VerifyEmailNotification;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class VerificationControllerTest extends TestCase
 {
@@ -28,7 +28,7 @@ class VerificationControllerTest extends TestCase
             'remember_token' => null,
         ]);
 
-        $response = $this->postJson(route('verification.resend'), [
+        $response = $this->postJson(route('api.verification.resend'), [
             'email' => $user->email,
         ]);
 
@@ -80,7 +80,7 @@ class VerificationControllerTest extends TestCase
             'remember_token' => null,
         ]);
 
-        $response = $this->postJson(route('verification.resend'), [
+        $response = $this->postJson(route('api.verification.resend'), [
             'email' => $user->email,
         ]);
 
