@@ -3,22 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Schema;
 
-class ClearLogs extends Command
+class ClearCache extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'logs:clear';
+    protected $signature = 'cache-app:clear';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'CLear all Laravel logs';
+    protected $description = 'Clear app cache.';
 
     /**
      * Create a new command instance.
@@ -37,14 +38,16 @@ class ClearLogs extends Command
      */
     public function handle()
     {
-        $file_list = glob('./storage/logs/{,*/}*.log', GLOB_BRACE);
+        $cache_driver = env('CACHE_DRIVER');
+        $cache_table_exist = Schema::hasTable('cache');
 
-        foreach ($file_list as $key => $file) {
-            $this->comment("Removing $file");
-            unlink($file);
+        if ($cache_driver == 'database' && $cache_table_exist) {
+            $this->call('cache:clear');
         }
 
-        $this->info('Logs have been cleared!');
+        if ($cache_driver == 'file') {
+            $this->call('cache:clear');
+        }
 
         return 0;
     }

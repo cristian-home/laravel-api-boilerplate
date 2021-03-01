@@ -3,22 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Schema;
 
-class ClearLogs extends Command
+class ClearTelescope extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'logs:clear';
+    protected $signature = 'telescope-app:clear';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'CLear all Laravel logs';
+    protected $description = 'Clear Laravel telescope entries.';
 
     /**
      * Create a new command instance.
@@ -37,14 +38,9 @@ class ClearLogs extends Command
      */
     public function handle()
     {
-        $file_list = glob('./storage/logs/{,*/}*.log', GLOB_BRACE);
-
-        foreach ($file_list as $key => $file) {
-            $this->comment("Removing $file");
-            unlink($file);
+        if (Schema::hasTable('telescope_entries')) {
+            $this->call('telescope:clear');
         }
-
-        $this->info('Logs have been cleared!');
 
         return 0;
     }

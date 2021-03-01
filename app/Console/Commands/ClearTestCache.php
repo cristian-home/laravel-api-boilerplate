@@ -4,21 +4,23 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class ClearLogs extends Command
+use function PHPUnit\Framework\fileExists;
+
+class ClearTestCache extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'logs:clear';
+    protected $signature = 'test-cache:clear';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'CLear all Laravel logs';
+    protected $description = 'CLear php unit test cache';
 
     /**
      * Create a new command instance.
@@ -37,14 +39,13 @@ class ClearLogs extends Command
      */
     public function handle()
     {
-        $file_list = glob('./storage/logs/{,*/}*.log', GLOB_BRACE);
+        $file = './.phpunit.result.cache';
 
-        foreach ($file_list as $key => $file) {
-            $this->comment("Removing $file");
+        if (file_exists($file)) {
             unlink($file);
         }
 
-        $this->info('Logs have been cleared!');
+        $this->info('PHP Unit cache have been cleared!');
 
         return 0;
     }
