@@ -13,7 +13,7 @@ return [
      *
      * In case you need your users to be asked for a new one time passwords from time to time.
      */
-    'lifetime' => env('OTP_LIFETIME', 0), // 0 = eternal
+    'lifetime' => (int) env('OTP_LIFETIME', 0), // 0 = eternal
 
     /*
      * Renew lifetime at every new request.
@@ -28,13 +28,13 @@ return [
     /*
      * Guard.
      */
-    'guard' => 'api',
+    'guard' => 'web',
 
     /*
      * 2FA verified session var.
      */
 
-    'session_var' => 'google2fa',
+    'session_var' => 'app2fa',
 
     /*
      * One Time Password request input name.
@@ -74,7 +74,7 @@ return [
     /*
      * One Time Password View.
      */
-    'view' => 'google2fa.index',
+    'view' => 'auth.2fa.index',
 
     /*
      * One Time Password error message.

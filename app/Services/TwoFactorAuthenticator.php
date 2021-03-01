@@ -2,22 +2,17 @@
 
 namespace App\Services;
 
-// use Illuminate\Http\Request as IlluminateRequest;
-// use PragmaRX\Google2FALaravel\Events\EmptyOneTimePasswordReceived;
-// use PragmaRX\Google2FALaravel\Events\LoginFailed;
-// use PragmaRX\Google2FALaravel\Events\LoginSucceeded;
-// use PragmaRX\Google2FALaravel\Exceptions\InvalidOneTimePassword;
-// use PragmaRX\Google2FALaravel\Google2FA;
-
+use Exception;
 use Validator;
 use Custom\OTP\OTPConstants;
 use Illuminate\Http\JsonResponse;
 use PragmaRX\Google2FALaravel\Support\Constants;
+use PragmaRX\Google2FALaravel\Events\LoginFailed;
+use PragmaRX\Google2FALaravel\Events\LoginSucceeded;
 use PragmaRX\Google2FALaravel\Support\Authenticator;
 use PragmaRX\Google2FALaravel\Exceptions\InvalidSecretKey;
 use PragmaRX\Google2FALaravel\Events\OneTimePasswordRequested;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
-// use Illuminate\Validation\Validator;
 
 class TwoFactorAuthenticator extends Authenticator
 {
@@ -89,6 +84,35 @@ class TwoFactorAuthenticator extends Authenticator
     }
 
     /**
+     * Check if the input OTP is valid. Returns one of the possible OTP_STATUS codes:
+     * 'empty', 'valid' or 'invalid'.
+     *
+     * @return string
+     */
+    protected function checkOTP()
+    {
+        if (
+            !$this->inputHasOneTimePassword() ||
+            empty($this->getInputOneTimePassword())
+        ) {
+            return Constants::OTP_EMPTY;
+        }
+
+        $isValid = $this->verifyOneTimePassword();
+
+        if ($isValid) {
+            $this->login();
+            $this->fireLoginEvent($isValid);
+
+            return Constants::OTP_VALID;
+        }
+
+        $this->fireLoginEvent($isValid);
+
+        return Constants::OTP_INVALID;
+    }
+
+    /**
      * Check if the recovery code is valid.
      *
      * @return bool
@@ -106,7 +130,6 @@ class TwoFactorAuthenticator extends Authenticator
         }
 
         foreach ($recovery_codes as $key => $code) {
-            // echo $key . ' => ' . $code . "\n";
             if ($code == $input) {
                 unset($recovery_codes[$key]);
 
@@ -115,6 +138,9 @@ class TwoFactorAuthenticator extends Authenticator
                 );
 
                 $user->save();
+
+                $this->login();
+                $this->fireLoginEvent(true);
 
                 return true;
             }
@@ -269,5 +295,21 @@ class TwoFactorAuthenticator extends Authenticator
                 ),
             ),
         );
+    }
+
+    /**
+     * Fire login (success or failed).
+     *
+     * @param $succeeded
+     */
+    private function fireLoginEvent($succeeded)
+    {
+        event(
+            $succeeded
+                ? new LoginSucceeded($this->getUser())
+                : new LoginFailed($this->getUser()),
+        );
+
+        return $succeeded;
     }
 }

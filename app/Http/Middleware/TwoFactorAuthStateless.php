@@ -2,13 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Controllers\Auth\OTPController;
 use Closure;
 use Illuminate\Http\Request;
-use App\Services\TwoFactorAuthenticator;
 use Custom\OTP\OTPConstants;
+use App\Services\TwoFactorAuthenticator;
 
-class TwoFactorAuthentication
+class TwoFactorAuthStateless
 {
     /**
      * Handle an incoming request.
