@@ -60,7 +60,8 @@
         "files": [
             "custom/doctrine/inflector/rules/spanish/Inflectible.php",
             "custom/laravel/support/Pluralizer.php",
-            "custom/otp/OTPConstants.php"
+            "custom/otp/OTPConstants.php",
+            "custom/helpers.php"
         ]
     },
     "autoload-dev": {
