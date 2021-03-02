@@ -9,7 +9,10 @@ services:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.0/app
         ports:
+            # Artisan serve
             - '${APP_PORT:-80}:80'
+            # Websockets
+            - '${WEBSOCKET_PORT:-6001}:6001'
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
@@ -69,17 +72,19 @@ services:
             - sail
         healthcheck:
           test: ["CMD", "redis-cli", "ping"]
-    # memcached:
-    #     image: 'memcached:alpine'
-    #     ports:
-    #         - '11211:11211'
-    #     networks:
-    #         - sail
     mailhog:
         image: 'mailhog/mailhog:latest'
         ports:
             - '${FORWARD_MAILHOG_PORT:-1025}:1025'
             - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
+        networks:
+            - sail
+    meilisearch:
+        image: 'getmeili/meilisearch:latest'
+        ports:
+            - '${FORWARD_MEILISEARCH_PORT:-7700}:7700'
+        volumes:
+            - 'sailmeilisearch:/data.ms'
         networks:
             - sail
 networks:
@@ -88,7 +93,9 @@ networks:
 volumes:
     sailmysql:
         driver: local
-#    sailpostgresql:
-#        driver: local
+    # sailpgsql:
+    #     driver: local
     sailredis:
+        driver: local
+    sailmeilisearch:
         driver: local
