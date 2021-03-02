@@ -181,6 +181,7 @@ return [
          * Custom Service Providers...
          */
         App\Providers\WebSocketsServiceProvider::class,
+        App\Providers\PaginationServiceProvider::class,
     ],
 
     /*
