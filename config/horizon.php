@@ -185,11 +185,11 @@ return [
 
             'supervisor-long-running' => [
                 'connection' => 'redis-long-running',
-                'queue' => ['procesar_excel'],
-                'balance' => 'simple',
-                'maxProcesses' => 3,
+                'queue' => ['long-running-queue'],
+                'balance' => 'auto',
+                'maxProcesses' => 5,
                 'tries' => 2,
-                'timeout' => (int) (30 * 60),
+                'timeout' => (int) (30 * 60), // 30 minutos
             ],
         ],
 
@@ -200,11 +200,11 @@ return [
 
             'supervisor-long-running' => [
                 'connection' => 'redis-long-running',
-                'queue' => ['procesar_excel'],
+                'queue' => ['long-running-queue'],
                 'balance' => 'simple',
                 'maxProcesses' => 3,
                 'tries' => 2,
-                'timeout' => (int) (30 * 60),
+                'timeout' => (int) (30 * 60), // 30 minutos
             ],
         ],
     ],
