@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,7 +27,12 @@ class WebSocketsServiceProvider extends ServiceProvider
     {
         // Gate para laravel websocket
         Gate::define('viewWebSocketsDashboard', function ($user) {
-            return in_array($user->email, ['chome@cpe.gov.co']);
+            return in_array(
+                $user->email,
+                User::role('super-admin')
+                    ->pluck('email')
+                    ->toArray(),
+            );
         });
     }
 }
