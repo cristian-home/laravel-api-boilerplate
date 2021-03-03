@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'middleware' => ['web', 'auth', '2fa'],
+    'middleware' => ['web', '2fa'],
 
     /*
     |--------------------------------------------------------------------------
@@ -182,11 +182,29 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],
+
+            'supervisor-long-running' => [
+                'connection' => 'redis-long-running',
+                'queue' => ['procesar_excel'],
+                'balance' => 'simple',
+                'maxProcesses' => 3,
+                'tries' => 2,
+                'timeout' => (int) (30 * 60),
+            ],
         ],
 
         'local' => [
             'supervisor-1' => [
                 'maxProcesses' => 3,
+            ],
+
+            'supervisor-long-running' => [
+                'connection' => 'redis-long-running',
+                'queue' => ['procesar_excel'],
+                'balance' => 'simple',
+                'maxProcesses' => 3,
+                'tries' => 2,
+                'timeout' => (int) (30 * 60),
             ],
         ],
     ],

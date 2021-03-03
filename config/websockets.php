@@ -1,6 +1,6 @@
 <?php
 
-use BeyondCode\LaravelWebSockets\Dashboard\Http\Middleware\Authorize;
+use App\Http\Middleware\LaravelWebSocketsAuthorize as Authorize;
 
 return [
     /*
@@ -68,7 +68,7 @@ return [
      * the chance to add your own middleware to this list or change any of
      * the existing middleware. Or, you can simply stick with this list.
      */
-    'middleware' => ['web', 'auth', '2fa', Authorize::class],
+    'middleware' => ['web', '2fa', Authorize::class],
 
     'statistics' => [
         /*

@@ -25,7 +25,7 @@ class WebSocketsServiceProvider extends ServiceProvider
     public function boot()
     {
         // Gate para laravel websocket
-        Gate::define('viewWebSocketsDashboard', function ($user = null) {
+        Gate::define('viewWebSocketsDashboard', function ($user) {
             return in_array($user->email, ['chome@cpe.gov.co']);
         });
     }
