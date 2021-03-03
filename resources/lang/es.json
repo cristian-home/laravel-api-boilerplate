@@ -66,6 +66,8 @@
     "Two-factor authentication has been enabled for your account.": "Se ha habilitado la autenticación de dos pasos para esta cuenta.",
     "Two-factor authentication has been disabled for your account.": "Se ha deshabilitado la autenticación de dos pasos para esta cuenta.",
     "If you did not perform this action please contact your system administrator.": "Si tu no realizaste esta acción por favor comunícate con el administrador del sistema.",
+    "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "Gracias por registrarte. Antes de empezar, ¿podrías verificar tu dirección de correo electrónico haciendo clic en el enlace que acabamos de enviarte? Si no has recibido el correo electrónico, te enviaremos otro con mucho gusto.",
+    "Resend Verification Email": "Reenviar correo",
     "Here should be the frontend (SPA, PWA, etc...).": "Aquí debería estar el frontend (SPA, PWA, etc...).",
     "Administration": "Administración",
     "Log in": "Iniciar sesión",
