@@ -51,7 +51,7 @@ return [
     | map to the dynamic properties used by Laravel Models.
     |
     */
-    'generate_phpdocs' => false,
+    'generate_phpdocs' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ return [
     | by defining your `foreign` key column with an `onDelete`.
     |
     */
-    'use_constraints' => false,
+    'use_constraints' => true,
 
     'on_delete' => 'cascade',
 
@@ -131,7 +131,7 @@ return [
         'factory' => \Blueprint\Generators\FactoryGenerator::class,
         'migration' => \Blueprint\Generators\MigrationGenerator::class,
         'model' => \Blueprint\Generators\ModelGenerator::class,
-        'route' => \Blueprint\Generators\RouteGenerator::class,
+        'route' => \Custom\Blueprint\Generators\RouteGenerator::class,
         'seeder' => \Blueprint\Generators\SeederGenerator::class,
         'test' => \Blueprint\Generators\TestGenerator::class,
         'event' => \Blueprint\Generators\Statements\EventGenerator::class,
