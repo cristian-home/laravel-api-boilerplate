@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Symfony\Component\Yaml\Yaml;
 
-class GenerateBlueprintDraft extends Command
+class BlueprintGenerate extends Command
 {
     /**
      * The name and signature of the console command.
@@ -14,9 +14,10 @@ class GenerateBlueprintDraft extends Command
      * @var string
      */
     protected $signature =
-        'blueprint:generatedraft' .
-        ' {--I|input=models.json : Json file with models}' .
-        ' {--O|output=draft.yaml : draft yaml ouput file}';
+        'blueprint:generate ' .
+        '{--i|input=models.json : Json file with models} ' .
+        '{--o|output=draft.yaml : draft yaml ouput file} ' .
+        '{--force : run without asking for confirmation}';
 
     /**
      * The console command description.
@@ -88,6 +89,7 @@ class GenerateBlueprintDraft extends Command
 
         if (file_exists($output_file_path)) {
             if (
+                !$this->option('force') &&
                 !$this->confirm(
                     "The {$output_file_name} file already exists, do you want to overwrite it?",
                 )
