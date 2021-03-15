@@ -56,10 +56,15 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Custom\\": "custom/",
+            "Custom\\OTP\\": "custom/otp",
+            "Custom\\Blueprint\\": "custom/laravel-shift/blueprint/src/",
+            "Custom\\Blueprint\\Generators\\": "custom/laravel-shift/blueprint/src/Generators"
         },
         "files": [
             "custom/doctrine/inflector/rules/spanish/Inflectible.php",
+            "custom/laravel-shift/blueprint/src/Models/Model.php",
             "custom/laravel/support/Pluralizer.php",
             "custom/otp/OTPConstants.php",
             "custom/helpers.php"
