@@ -130,7 +130,7 @@ return [
         'controller' => \Blueprint\Generators\ControllerGenerator::class,
         'factory' => \Blueprint\Generators\FactoryGenerator::class,
         'migration' => \Blueprint\Generators\MigrationGenerator::class,
-        'model' => \Blueprint\Generators\ModelGenerator::class,
+        'model' => \Custom\Blueprint\Generators\ModelGenerator::class,
         'route' => \Custom\Blueprint\Generators\RouteGenerator::class,
         'seeder' => \Blueprint\Generators\SeederGenerator::class,
         'test' => \Blueprint\Generators\TestGenerator::class,
