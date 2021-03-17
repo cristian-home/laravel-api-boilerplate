@@ -67,6 +67,14 @@ return [
             'retry_after' => 90,
             'block_for' => null,
         ],
+
+        'redis-long-running' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => 'long-running-queue',
+            'retry_after' => (int) (35 * 60), // 35 minutos
+            'block_for' => null,
+        ],
     ],
 
     /*

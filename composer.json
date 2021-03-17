@@ -9,22 +9,35 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "bacon/bacon-qr-code": "^2.0",
         "beyondcode/laravel-websockets": "^1.9",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "imtigger/laravel-job-status": "^1.2",
         "laravel/framework": "^8.12",
+        "laravel/horizon": "^5.7",
         "laravel/passport": "^10.1",
+        "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
-        "laraveles/spanish": "^1.5"
+        "laraveles/spanish": "^1.5",
+        "pragmarx/google2fa-laravel": "^1.4",
+        "pragmarx/recovery": "^0.1.0",
+        "predis/predis": "^1.1",
+        "spatie/laravel-permission": "^3.18",
+        "spatie/laravel-query-builder": "^3.3",
+        "symfony/yaml": "^5.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",
+        "brianium/paratest": "^6.1",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "jasonmccreary/laravel-test-assertions": "^1.0",
-        "laravel-shift/blueprint": "^1.20",
+        "laravel-shift/blueprint": "^1.21",
+        "laravel/breeze": "^1.1",
+        "laravel/dusk": "^6.12",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
@@ -44,8 +57,19 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
+            "Database\\Seeders\\": "database/seeders/",
+            "Custom\\": "custom/",
+            "Custom\\OTP\\": "custom/otp",
+            "Custom\\Blueprint\\": "custom/laravel-shift/blueprint/src/",
+            "Custom\\Blueprint\\Generators\\": "custom/laravel-shift/blueprint/src/Generators"
+        },
+        "files": [
+            "custom/doctrine/inflector/rules/spanish/Inflectible.php",
+            "custom/laravel-shift/blueprint/src/Models/Model.php",
+            "custom/laravel/support/Pluralizer.php",
+            "custom/otp/OTPConstants.php",
+            "custom/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

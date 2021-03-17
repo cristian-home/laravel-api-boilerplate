@@ -37,7 +37,7 @@ class ProjectInit extends Command
      */
     public function handle()
     {
-        $this->info('Creating .env file.');
+        $this->info('Creating .env file if it does not exist.');
         if (!file_exists('.env')) {
             copy('.env.example', '.env');
         }
@@ -45,11 +45,18 @@ class ProjectInit extends Command
             ? $this->info('✅ Success')
             : $this->error('❌ Error');
 
-        $this->info('Creating sqlite database file.');
-        fopen('database/database.sqlite', 'w');
-        file_exists('database/database.sqlite')
-            ? $this->info('✅ Success')
-            : $this->error('❌ Error');
+        if (env('DB_CONNECTION') == 'sqlite') {
+            $sqlite_file = env('DB_DATABASE', 'database.sqlite');
+            $sqlite_file_path = makeSqliteFile();
+
+            $this->info("Emptying $sqlite_file file.");
+
+            fopen($sqlite_file_path, 'w');
+
+            file_exists($sqlite_file_path)
+                ? $this->info('✅ Success')
+                : $this->error('❌ Error');
+        }
 
         $this->info('Generating application key.');
         $this->call('key:generate');

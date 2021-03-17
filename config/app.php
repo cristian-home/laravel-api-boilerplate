@@ -163,6 +163,10 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\HorizonServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        Imtigger\LaravelJobStatus\LaravelJobStatusBusServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -172,6 +176,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * Custom Service Providers...
+         */
+        App\Providers\WebSocketsServiceProvider::class,
+        App\Providers\PaginationServiceProvider::class,
     ],
 
     /*

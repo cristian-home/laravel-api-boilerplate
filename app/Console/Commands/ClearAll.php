@@ -38,11 +38,16 @@ class ClearAll extends Command
     public function handle()
     {
         $this->info('Clear all caches.');
-        $this->call('cache:clear');
+
+        $this->call('view:clear');
+        $this->call('logs:clear');
         $this->call('route:clear');
         $this->call('config:clear');
-        $this->call('view:clear');
+        $this->call('sessions:clear');
         $this->call('clear-compiled');
+        $this->call('cache-app:clear');
+        $this->call('test-cache:clear');
+        $this->call('telescope-app:clear');
 
         return 0;
     }

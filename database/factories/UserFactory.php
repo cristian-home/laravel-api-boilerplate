@@ -3,9 +3,10 @@
 namespace Database\Factories;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Custom\OTP\OTPConstants;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
 {
@@ -26,7 +27,10 @@ class UserFactory extends Factory
         return [
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'password' => Hash::make($this->faker->password), // password
+            'password' => Hash::make($this->faker->password),
+            OTPConstants::OTP_ENABLED_COLUMN => false,
+            OTPConstants::OTP_SECRET_COLUMN => null,
+            OTPConstants::OTP_RECOVERY_CODES_COLUMN => null,
             'remember_token' => Str::random(10),
         ];
     }

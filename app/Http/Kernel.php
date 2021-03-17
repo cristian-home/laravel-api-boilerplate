@@ -65,5 +65,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
         'to.lower' => \App\Http\Middleware\ToLowerCase::class,
+        // Google 2FA
+        '2fa' => \App\Http\Middleware\TwoFactorAuth::class,
+        '2fa.api' => \App\Http\Middleware\TwoFactorAuthStateless::class,
+        '2fa.status' => \App\Http\Middleware\TwoFactorAuthStatus::class,
     ];
 }
