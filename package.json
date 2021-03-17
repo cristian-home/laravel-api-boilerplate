@@ -1,4 +1,5 @@
 {
+    "name": "laravel-api-boilerplate",
     "private": true,
     "scripts": {
         "dev": "npm run development",
