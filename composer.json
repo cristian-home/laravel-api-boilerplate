@@ -26,6 +26,7 @@
         "pragmarx/recovery": "^0.1.0",
         "predis/predis": "^1.1",
         "spatie/laravel-permission": "^3.18",
+        "spatie/laravel-query-builder": "^3.3",
         "symfony/yaml": "^5.2"
     },
     "require-dev": {
