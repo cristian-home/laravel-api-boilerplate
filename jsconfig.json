@@ -3,9 +3,12 @@
         "baseUrl": ".",
         "module": "commonjs",
         "paths": {
-            "@fonts/*": ["./resources/fonts/*"],
+            "@js/*": ["./resources/js/*"],
             "@css/*": ["./resources/css/*"],
-            "@js/*": ["./resources/js/*"]
+            "@scss/*": ["./resources/scss/*"],
+            "@fonts/*": ["./resources/fonts/*"],
+            "@views/*": ["./resources/js/views/*"],
+            "@components/*": ["./resources/js/components/*"]
         }
     }
 }

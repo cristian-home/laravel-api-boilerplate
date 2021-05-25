@@ -83,5 +83,14 @@
     "Forbidden": "Prohibido",
     "Not Found": "No encontrado",
     "Whoops! Something went wrong.": "¡Ups! Algo salió mal.",
-    "Real-time communication.": "Comunicación en tiempo real."
+    "Real-time communication.": "Comunicación en tiempo real.",
+    "Home": "Inicio",
+    "About": "Acerca de",
+    "This is an about page": "Esta es una página de información",
+    "Welcome to Your Vue.js App": "Bienvenido a su aplicación Vue.js",
+    "Installed CLI Plugins": "Plugins CLI instalados",
+    "Essential Links": "Enlaces esenciales",
+    "Ecosystem": "Ecosistema",
+    "For a guide and recipes on how to configure / customize this project, check out the vue-cli documentation.":"Para una guía y recetas sobre cómo configurar / personalizar este proyecto, consulte la documentación de vue-cli.",
+    "vue-cli documentation": "Documentación de vue-cli"
 }
